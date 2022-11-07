@@ -16,18 +16,15 @@ import javax.swing.JOptionPane;
 public class VistaConsola {
 
     private Servico servicio;
-
-    public VistaConsola(Servico servicio) {
-        this.servicio = new Servico();
-    }
-
-    
     private String menuGeneral[] = {"1. Registro de Vehiculo",
         "2. Consulta de vehiculo",
         "3. Informe de vehiculo",
         "4. Salir",
         "0. Salir"};
     private int opcMenuGeneral;
+    public VistaConsola() {
+        this.servicio = new Servico();
+    }
 
     private void VistaRegistarVehiculo() {
         Vehiculo vehiculoadd;
