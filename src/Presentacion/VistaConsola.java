@@ -3,8 +3,9 @@ package Presentacion;
 import Datos.Peaje;
 import Entidades.Vehiculo;
 import Modelo.Servico;
+import java.io.PrintStream;
 import javax.swing.JOptionPane;
-
+import java.util.ArrayList;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -25,7 +26,23 @@ public class VistaConsola {
     public VistaConsola() {
         this.servicio = new Servico();
     }
-
+    private void BuscarVehiculo(){
+        String placa = Teclado.leerString("Seleccione placa: ");
+        Vehiculo v = this.servicio.cosultarVehiculo(placa);
+    }
+    private void InformePeaje(){
+        System.out.println("");
+        ArrayList<Vehiculo> disponibles = this.servicio.InformePeaje();
+        int i = disponibles.size();
+        System.out.printf("Vehiculos Registrados en el peaje:[ %d ]%n", i);
+        System.out.println("-------------------------------------------------------------");
+         if (disponibles.size() > 0) {
+            PrintStream printf = System.out.printf("%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t%i\t\t%i\n", "Placa", "Marca", "Propietario", "Modelo","Cedula","Nmejes","Categoria");
+          for (Vehiculo v : disponibles) {
+            System.out.print(v.INFO());
+        }  
+        }
+    }
     private void VistaRegistarVehiculo() {
         Vehiculo vehiculoadd;
         Menu.tituloVista(this.menuGeneral[this.opcMenuGeneral - 1]);
@@ -73,10 +90,10 @@ public class VistaConsola {
                     this.VistaRegistarVehiculo();
                     break;
                 case 2:
-                    
+                    this.BuscarVehiculo();
                     break;
                 case 3:
-                    
+                    this.InformePeaje();
                     break;
                 case 4:
                     

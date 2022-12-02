@@ -88,11 +88,13 @@ public class Vehiculo {
     public void setCategoria(int categoria) {
         this.categoria = categoria;
     }
-//
-//    @Override
-//    public String toString() {
-//        return Placa+Marca+Propietario+Modelo+Cedula+Numejes+categoria;
-//    }
+    public double calcularImporte(){
+        return 0;           
+    }
+
+    public String INFO() {
+       return String.format("%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t%i\t\t%i\n");
+    }
     
     
 

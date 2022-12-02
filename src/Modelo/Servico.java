@@ -16,4 +16,11 @@ public class Servico {
     public void registrarVehiculo(Vehiculo v){
         this.libroelectronico.gregarVehiculo(v);
     }
+    public ArrayList<Vehiculo> InformePeaje(){
+        return this.libroelectronico.InformePeaje();
+    }
+    public Vehiculo cosultarVehiculo(String placa){
+        return this.libroelectronico.ConsultarVehiculo(placa);
+    }
+   
 }
