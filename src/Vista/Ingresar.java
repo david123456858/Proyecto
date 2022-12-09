@@ -4,13 +4,22 @@
  */
 package Vista;
 
+import Modelo.GestioUsuario;
 import java.awt.Color;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author dulfu
  */
 public class Ingresar extends javax.swing.JFrame {
+    public static String User= "j";
+    public String pass = "j";
+    public String tipo = "Admin";
+    private GestioUsuario modeloUsuario;
 
     /**
      * Creates new form Ingresar
@@ -18,6 +27,7 @@ public class Ingresar extends javax.swing.JFrame {
     public Ingresar() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.modeloUsuario = new GestioUsuario();
     }
 
     /**
@@ -144,6 +154,9 @@ public class Ingresar extends javax.swing.JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 EntrarMouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                EntrarMousePressed(evt);
+            }
         });
 
         javax.swing.GroupLayout entraLayout = new javax.swing.GroupLayout(entra);
@@ -213,11 +226,11 @@ public class Ingresar extends javax.swing.JFrame {
     }//GEN-LAST:event_IngresarActionPerformed
 
     private void EntrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EntrarMouseEntered
-      entra.setBackground(new Color (232, 255, 1));
+        entra.setBackground(new Color(232, 255, 1));
     }//GEN-LAST:event_EntrarMouseEntered
 
     private void EntrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EntrarMouseExited
-        entra.setBackground(new Color(198,225,0));
+        entra.setBackground(new Color(198, 225, 0));
     }//GEN-LAST:event_EntrarMouseExited
 
     private void RegistrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarMouseEntered
@@ -225,35 +238,47 @@ public class Ingresar extends javax.swing.JFrame {
     }//GEN-LAST:event_RegistrarMouseEntered
 
     private void RegistrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarMouseExited
-        registrar.setBackground(new Color (198,225,0));
+        registrar.setBackground(new Color(198, 225, 0));
     }//GEN-LAST:event_RegistrarMouseExited
 
     private void IngresarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IngresarMousePressed
-       if(Ingresar.getText().equals("Ingrese usuario")){
-        Ingresar.setText("");
-        Ingresar.setForeground(Color.black);
-       }
-       if(String.valueOf(Contra.getPassword()).isEmpty()){
-        Contra.setText("**********");
-        Contra.setForeground(Color.gray);
-       }
+        if (Ingresar.getText().equals("Ingrese usuario")) {
+            Ingresar.setText("");
+            Ingresar.setForeground(Color.black);
+        }
+        if (String.valueOf(Contra.getPassword()).isEmpty()) {
+            Contra.setText("**********");
+            Contra.setForeground(Color.gray);
+        }
     }//GEN-LAST:event_IngresarMousePressed
 
     private void ContraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ContraMousePressed
-        if(String.valueOf(Contra.getPassword()).equals("**********")){
-        Contra.setText("");
-        Contra.setForeground(Color.black);    
+        if (String.valueOf(Contra.getPassword()).equals("**********")) {
+            Contra.setText("");
+            Contra.setForeground(Color.black);
         }
-        if(Ingresar.getText().isEmpty()){
-           Ingresar.setForeground(Color.gray);
-           Ingresar.setText("Ingrese usuario");
+        if (Ingresar.getText().isEmpty()) {
+            Ingresar.setForeground(Color.gray);
+            Ingresar.setText("Ingrese usuario");
         }
     }//GEN-LAST:event_ContraMousePressed
 
     private void RegistrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarMousePressed
-        Registro registro = new Registro(null,false);
+        Registro registro = new Registro(null, false);
         registro.setVisible(true);
     }//GEN-LAST:event_RegistrarMousePressed
+
+    private void EntrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EntrarMousePressed
+
+    if(Ingresar.getText().equals("Ingrese usuario") || Contra.getText().isEmpty()||Ingresar.getText().isEmpty()){
+         JOptionPane.showMessageDialog(this, "Usuario o Contraseña vacios", "IMPORTANTE", JOptionPane.NO_OPTION);
+    }else{
+        if(Ingresar.getText().equals(User)&&Contra.getText().equals(pass))
+        new GestionCategorias().setVisible(true);
+    }
+          
+
+    }//GEN-LAST:event_EntrarMousePressed
 
     /**
      * @param args the command line arguments

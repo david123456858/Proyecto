@@ -31,12 +31,26 @@ public class GestioUsuario {
     public Usuario BuscarUsuario(String usuario)throws IOException{
         return this.archivo.BuscarUsuario(usuario);
     }
-    public boolean BuscarAdmin() throws IOException{
-        return this.archivo.BuscarAdmin();
+    public boolean BuscarAdmin(String tipo) throws IOException{
+        return this.archivo.BuscarAdmin(tipo);
     }
+    public boolean BuscarTipo()throws IOException{
+       
+        ArrayList<Usuario> lista = this.archivo.leerUsuarios();
+        for(Usuario g: lista){
+            System.out.println(g);
+        }
+        for(Usuario U: lista ){
+            if (U.getTipo().equalsIgnoreCase("Admin"))
+                return true;
+                
+        }
+        return false;
+    }
+    
     public boolean Autentificar (String usuario, String contra)throws IOException{
         if(obtener(usuario)!=null){
-            Usuario Consulta = obtener(usuario);
+            Usuario Consulta = BuscarUsuario(usuario);
             if(Consulta.getUsuario().equals(usuario)&&Consulta.getContra().equals(contra)){
                 return true;
             }else{

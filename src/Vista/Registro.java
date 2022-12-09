@@ -36,16 +36,8 @@ public class Registro extends javax.swing.JDialog {
         int cc = Integer.valueOf(this.CC.getText());
         String usuario = this.Usuario.getText();
         String correo = this.Correo.getText();
-        String pass = "";
-        char[] contra = this.Contra.getPassword();
-        for (int i = 0; i < contra.length; i++) {
-            pass += contra[i];
-        }
-        if (Admin.isSelected()) {
-
-            tipo = "Admin";
-
-        } else {
+        String pass = new String(Contra.getPassword());
+        if (Particular.isSelected()) {
             tipo = "Particular";
         }
 
@@ -54,9 +46,11 @@ public class Registro extends javax.swing.JDialog {
 
     public void GuardarDatos() {
         try {
+
             Usuario usuario = this.leerDatos();
             this.modeloUsuario.agregarUsuario(usuario);
             JOptionPane.showMessageDialog(this, "Datos guardados con exito", "COnfirmacion", JOptionPane.INFORMATION_MESSAGE);
+
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, ex, "Error de archivo", JOptionPane.ERROR_MESSAGE);
         } catch (IllegalArgumentException ie) {
@@ -86,7 +80,6 @@ public class Registro extends javax.swing.JDialog {
         jSeparator3 = new javax.swing.JSeparator();
         Usuario = new javax.swing.JTextField();
         Correo = new javax.swing.JTextField();
-        Admin = new javax.swing.JRadioButton();
         Particular = new javax.swing.JRadioButton();
         regis = new javax.swing.JPanel();
         Regsitrar = new javax.swing.JLabel();
@@ -190,14 +183,6 @@ public class Registro extends javax.swing.JDialog {
             }
         });
         atras.add(Correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, 200, -1));
-
-        Admin.setBackground(new java.awt.Color(255, 255, 255));
-        Botones.add(Admin);
-        Admin.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        Admin.setForeground(new java.awt.Color(0, 0, 0));
-        Admin.setText("Admin");
-        Admin.setBorder(null);
-        atras.add(Admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, -1, -1));
 
         Botones.add(Particular);
         Particular.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
@@ -311,9 +296,22 @@ public class Registro extends javax.swing.JDialog {
     }//GEN-LAST:event_RegsitrarMouseExited
 
     private void RegsitrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegsitrarMousePressed
+        if (txtnombre.getText().isEmpty()
+                || Correo.getText().isEmpty()
+                || Usuario.getText().isEmpty()
+                || Contra.getText().isEmpty()
+                || CC.getText().isEmpty()
+                || txtnombre.getText().equals("")
+                || Correo.getText().equals("")
+                || Usuario.getText().equals("")
+                || Contra.getText().equals("")
+                || CC.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Algun campo vacio", "IMPORTANTE", JOptionPane.NO_OPTION);
+        } else {
 
-        this.GuardarDatos();
+            this.GuardarDatos();
 
+        }
 
     }//GEN-LAST:event_RegsitrarMousePressed
 
@@ -502,7 +500,6 @@ public class Registro extends javax.swing.JDialog {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton Admin;
     private javax.swing.ButtonGroup Botones;
     private javax.swing.JFormattedTextField CC;
     private javax.swing.JPasswordField Contra;
@@ -526,4 +523,5 @@ public class Registro extends javax.swing.JDialog {
     private javax.swing.JPanel regis;
     private javax.swing.JTextField txtnombre;
     // End of variables declaration//GEN-END:variables
+
 }

@@ -56,6 +56,7 @@ public class AUsuario implements IUsuario {
     public void agregarUsuario(Usuario U) throws IOException {
         PrintWriter pw = null;
         try {
+            
             this.modoEscritura = new FileWriter(this.manejosArchivo, true);
             pw = new PrintWriter(this.modoEscritura);
             pw.printf("%d;%s;%s;%s;%s;%s;",
@@ -80,7 +81,7 @@ public class AUsuario implements IUsuario {
         }
     }
 
-    private Usuario cargarUsuario(String dato[]) throws IOException {
+    private Usuario cargarUsuario(String dato[])  {
         int CC = Integer.valueOf(dato[0]);
         String nombre = dato[1];
         String correo = dato[2];
@@ -93,7 +94,7 @@ public class AUsuario implements IUsuario {
 
     @Override
     public ArrayList<Usuario> leerUsuarios() throws IOException {
-        ArrayList<Usuario> lista = null;
+        ArrayList<Usuario> lista ;
         if (!this.manejosArchivo.exists()) {
             lista = new ArrayList();
             return lista;
@@ -119,14 +120,15 @@ public class AUsuario implements IUsuario {
     }
 
     @Override
-    public boolean BuscarAdmin() throws IOException {
+    public boolean BuscarAdmin(String tipo) throws IOException {
+        boolean encontrado = false;
         try {
-            boolean encontrado = false;
+            
             this.modolectura = new Scanner(this.manejosArchivo);
             while (this.modolectura.hasNext()) {
                 String dato[] = this.modolectura.nextLine().split(";");
                 Usuario U = this.cargarUsuario(dato);
-                if (U.getTipo().equals("Admin")) {
+                if (U.getTipo().equalsIgnoreCase(tipo)) {
                     encontrado = true;
                     break;
                 } else {
@@ -153,7 +155,7 @@ public class AUsuario implements IUsuario {
             while (this.modolectura.hasNext()) {
                 String dato[] = this.modolectura.nextLine().split(";");
                 Usuario U = this.cargarUsuario(dato);
-                if (U.getUsuario() == usuario) {
+                if (U.getUsuario().equalsIgnoreCase(usuario)) {
                     buscada = U;
                     break;
                 }
@@ -188,5 +190,7 @@ public class AUsuario implements IUsuario {
             return null;
         }
     }
+
+
 
 }

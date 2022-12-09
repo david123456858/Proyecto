@@ -19,5 +19,6 @@ public interface IUsuario {
     ArrayList<Usuario> leerUsuarios()throws IOException;
     Usuario BuscarUsuario(String usuario)throws IOException;
     public Usuario obtener(String usuario) throws IOException;
-    public boolean BuscarAdmin() throws IOException;
+    public boolean BuscarAdmin(String tipo) throws IOException;
+   
 }

@@ -73,4 +73,9 @@ public class Usuario {
         this.tipo = tipo;
     }
 
+    @Override
+    public String toString() {
+        return "Usuario{" + "CC=" + CC + ", usuario=" + usuario + ", contra=" + contra + ", nombre=" + nombre + ", correo=" + correo + ", tipo=" + tipo + '}';
+    }
+
 }

@@ -1,5 +1,6 @@
 package Presentacion;
 
+import Vista.GestionCategorias;
 import Vista.Ingresar;
 
 
@@ -25,6 +26,7 @@ public class Main {
         // TODO code application logic here
       //new VistaConsola().menuGeneral();
       new Ingresar().setVisible(true);
+//      new GestionCategorias().setVisible(true);
     }
     
 }
