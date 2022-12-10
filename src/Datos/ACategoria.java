@@ -62,12 +62,10 @@ public class ACategoria implements ICategorias {
         try {
            this.modoEscritarua = new FileWriter(this.manejadoArchivo, true);
             pw = new PrintWriter(this.modoEscritarua);
-            pw.printf("%s;%s;%.3f",
+            pw.printf("%s;%s;%.3f;\n",
                     c.getNum(),
                     c.getNombre(),
-                    c.getFactura());
-            
-            
+                    c.getFactura());              
         } catch (FileNotFoundException fne) {
             throw new IOException("Error al escribir en el archivo");
         } catch (IOException ioe) {

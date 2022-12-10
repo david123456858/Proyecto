@@ -5,10 +5,14 @@
 package Vista;
 
 import Entidades.Categoria;
+import Entidades.Descuento;
 import Modelo.GestioCategorias;
+import Modelo.GestioDescuento;
 import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,26 +20,47 @@ import javax.swing.JOptionPane;
  * @author dulfu
  */
 public class GestionDescuento extends javax.swing.JFrame {
-    
-    private GestioCategorias gestioncate ;
+
+    private GestioCategorias gestioncate;
+    private GestioDescuento gestionde;
+
     public GestionDescuento() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.gestioncate = new GestioCategorias();
+        this.gestionde = new GestioDescuento();
         this.cargarCategorias();
     }
-    
+
     public void cargarCategorias() {
         try {
             ArrayList<Categoria> lista = this.gestioncate.leercategorias();
-            for(Categoria c: lista){
+            for (Categoria c : lista) {
                 this.Categorias.addItem(c.getNombre());
             }
         } catch (IOException io) {
             JOptionPane.showMessageDialog(this, io, "Error de archivo", JOptionPane.ERROR_MESSAGE);
         }
-
     }
+
+    public Descuento leerdatos() throws IOException {
+
+        double p = Double.valueOf(this.DESCUP.getText());
+        double s = Double.valueOf(this.DESCUS.getText());
+        int DP = Integer.valueOf(this.PP.getText());
+        int DS = Integer.valueOf(this.PS.getText());
+        String cate = this.Categorias.getSelectedItem().toString();
+        Categoria cat = this.gestioncate.Buscarpornombre(cate);
+        return new Descuento(p, s, DP, DS, cat);
+    }
+
+    public void GuardarDe() throws IOException {
+        Descuento d = this.leerdatos();
+        this.gestionde.registrarDescuentos(d);
+        JOptionPane.showMessageDialog(this, "Datos guardados con exito", "COnfirmacion", JOptionPane.INFORMATION_MESSAGE);
+        
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -131,7 +156,7 @@ public class GestionDescuento extends javax.swing.JFrame {
         PP.setBackground(new java.awt.Color(255, 255, 255));
         PP.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         PP.setForeground(new java.awt.Color(102, 102, 102));
-        PP.setText("Ingrese un numero");
+        PP.setText("Ingrese para particulares");
         PP.setBorder(null);
         PP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -149,7 +174,7 @@ public class GestionDescuento extends javax.swing.JFrame {
         PS.setBackground(new java.awt.Color(255, 255, 255));
         PS.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         PS.setForeground(new java.awt.Color(102, 102, 102));
-        PS.setText("Ingrese un numero");
+        PS.setText("Ingrese para servivio publico");
         PS.setBorder(null);
         PS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -227,6 +252,9 @@ public class GestionDescuento extends javax.swing.JFrame {
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 GuardarMouseExited(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                GuardarMousePressed(evt);
+            }
         });
 
         javax.swing.GroupLayout GULayout = new javax.swing.GroupLayout(GU);
@@ -278,11 +306,11 @@ public class GestionDescuento extends javax.swing.JFrame {
             DESCUP.setForeground(Color.black);
         }
         if (PS.getText().isEmpty()) {
-            PS.setText("Ingrese un numero");
+            PS.setText("Ingrese para servivio publico");
             PS.setForeground(Color.gray);
         }
         if (PP.getText().isEmpty()) {
-            PP.setText("Ingrese un numero");
+            PP.setText("Ingrese para particulares");
             PP.setForeground(Color.gray);
         }
         if (DESCUS.getText().isEmpty()) {
@@ -297,11 +325,11 @@ public class GestionDescuento extends javax.swing.JFrame {
             DESCUS.setForeground(Color.black);
         }
         if (PS.getText().isEmpty()) {
-            PS.setText("Ingrese un numero");
+            PS.setText("Ingrese para servivio publico");
             PS.setForeground(Color.gray);
         }
         if (PP.getText().isEmpty()) {
-            PP.setText("Ingrese un numero");
+            PP.setText("Ingrese para particulares");
             PP.setForeground(Color.gray);
         }
         if (DESCUP.getText().isEmpty()) {
@@ -311,13 +339,13 @@ public class GestionDescuento extends javax.swing.JFrame {
     }//GEN-LAST:event_DESCUSMousePressed
 
     private void PPMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PPMousePressed
-        if (PS.getText().equals("Ingrese un numero")) {
-            PS.setText("");
-            PS.setForeground(Color.black);
+        if (PP.getText().equals("Ingrese para particulares")) {
+            PP.setText("");
+            PP.setForeground(Color.black);
         }
-        if (PP.getText().isEmpty()) {
-            PP.setText("Ingrese un numero");
-            PP.setForeground(Color.gray);
+        if (PS.getText().isEmpty()) {
+            PS.setText("Ingrese para servivio publico");
+            PS.setForeground(Color.gray);
         }
         if (DESCUS.getText().isEmpty()) {
             DESCUS.setText("Ingrese Descuento %");
@@ -330,13 +358,13 @@ public class GestionDescuento extends javax.swing.JFrame {
     }//GEN-LAST:event_PPMousePressed
 
     private void PSMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PSMousePressed
-       if (PP.getText().equals("Ingrese un numero")) {
-            PP.setText("");
-            PP.setForeground(Color.black);
+        if (PS.getText().equals("Ingrese para servivio publico")) {
+            PS.setText("");
+            PS.setForeground(Color.black);
         }
-        if (PS.getText().isEmpty()) {
-            PS.setText("Ingrese un numero");
-            PS.setForeground(Color.gray);
+        if (PP.getText().isEmpty()) {
+            PP.setText("Ingrese para particulares");
+            PP.setForeground(Color.gray);
         }
         if (DESCUS.getText().isEmpty()) {
             DESCUS.setText("Ingrese Descuento %");
@@ -349,8 +377,16 @@ public class GestionDescuento extends javax.swing.JFrame {
     }//GEN-LAST:event_PSMousePressed
 
     private void CategoriasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CategoriasMousePressed
-       
+
     }//GEN-LAST:event_CategoriasMousePressed
+
+    private void GuardarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMousePressed
+        try {
+            this.GuardarDe();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, ex, "Error de archivo", JOptionPane.ERROR_MESSAGE);;
+        }
+    }//GEN-LAST:event_GuardarMousePressed
 
     /**
      * @param args the command line arguments

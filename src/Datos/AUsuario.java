@@ -59,13 +59,14 @@ public class AUsuario implements IUsuario {
             
             this.modoEscritura = new FileWriter(this.manejosArchivo, true);
             pw = new PrintWriter(this.modoEscritura);
-            pw.printf("%d;%s;%s;%s;%s;%s;",
+            pw.printf("%d;%s;%s;%s;%s;%s;\n",
                     U.getCC(),
                     U.getNombre(),
                     U.getCorreo(),
                     U.getUsuario(),
                     U.getTipo(),
                     U.getContra());
+            
         } catch (FileNotFoundException F) {
             throw new IOException("Error al escribir en el archivo");
         } catch (IOException ioe) {
@@ -88,7 +89,7 @@ public class AUsuario implements IUsuario {
         String usuario = dato[3];
         String tipo = dato[4];
         String contra = dato[5];
-        Usuario U = new Usuario(CC, nombre, correo, usuario, tipo, contra);
+        Usuario U = new Usuario(CC, nombre, correo, usuario, contra, tipo);
         return U;
     }
 

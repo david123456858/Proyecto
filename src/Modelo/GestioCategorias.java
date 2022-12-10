@@ -29,4 +29,13 @@ public class GestioCategorias {
      public Categoria BuscarCategoria(String n) throws IOException{
          return this.archivo.BuscarCategoria(n);
      }
+     public Categoria Buscarpornombre(String n ) throws IOException {
+         ArrayList<Categoria> lista = this.archivo.leercategorias();
+         for(Categoria c: lista){
+             if(c.getNombre().equalsIgnoreCase(n)){
+                 return c;
+             }
+         }
+         return null;
+     }
 }

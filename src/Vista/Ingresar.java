@@ -16,7 +16,8 @@ import javax.swing.JOptionPane;
  * @author dulfu
  */
 public class Ingresar extends javax.swing.JFrame {
-    public static String User= "j";
+
+    public static String User = "j";
     public String pass = "j";
     public String tipo = "Admin";
     private GestioUsuario modeloUsuario;
@@ -270,13 +271,29 @@ public class Ingresar extends javax.swing.JFrame {
 
     private void EntrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EntrarMousePressed
 
-    if(Ingresar.getText().equals("Ingrese usuario") || Contra.getText().isEmpty()||Ingresar.getText().isEmpty()){
-         JOptionPane.showMessageDialog(this, "Usuario o Contraseña vacios", "IMPORTANTE", JOptionPane.NO_OPTION);
-    }else{
-        if(Ingresar.getText().equals(User)&&Contra.getText().equals(pass))
-        new GestionCategorias().setVisible(true);
-    }
-          
+        if (Ingresar.getText().equals("Ingrese usuario") || Contra.getText().isEmpty() || Ingresar.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Usuario o Contraseña vacios", "IMPORTANTE", JOptionPane.NO_OPTION);
+        } else {
+            if (Ingresar.getText().equals(User) && Contra.getText().equals(pass)) {
+                new GestionCategorias().setVisible(true);
+            } else {
+                try {
+                    String usuari = Ingresar.getText();
+                    String Con = Contra.getText();
+                    boolean p = this.modeloUsuario.Autentificar(usuari, Con);
+                    if (p) {
+                        this.modeloUsuario.Buscar(usuari);
+                        JOptionPane.showMessageDialog(this, "Es correcto ", "IMPORTANTE", JOptionPane.NO_OPTION);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Usuario o contra Incorrecto ", "IMPORTANTE", JOptionPane.NO_OPTION);
+                    }
+
+                } catch (IOException ex) {
+                    Logger.getLogger(Ingresar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
 
     }//GEN-LAST:event_EntrarMousePressed
 

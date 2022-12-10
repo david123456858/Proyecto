@@ -64,7 +64,7 @@ public class ADescuento implements IDescuento {
         try {
             this.modoEscritura = new FileWriter(this.manejosArchivo, true);
             pw = new PrintWriter(this.modoEscritura);
-           pw.printf("%.2f;%.2f;%d;%d;%s",
+           pw.printf("%.2f;%.2f;%d;%d;%s\n",
                     d.getParticular(),
                     d.getServicio(),
                     d.getNumpasespublic(),
@@ -123,7 +123,7 @@ public class ADescuento implements IDescuento {
 
     @Override
     public void ModificarDescuento(Descuento d) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
     }
 
 }

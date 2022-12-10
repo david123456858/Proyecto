@@ -15,53 +15,54 @@ import java.util.ArrayList;
  * @author dulfu
  */
 public class GestioUsuario {
+
     private IUsuario archivo;
-
-
-
+    
     public GestioUsuario() {
-        this.archivo = new AUsuario() ;
+        this.archivo = new AUsuario();
     }
-    public  void agregarUsuario(Usuario U)throws IOException{
+
+    public void agregarUsuario(Usuario U) throws IOException {
         this.archivo.agregarUsuario(U);
     }
-    public ArrayList<Usuario> leerUsuarios()throws IOException{
+
+    public ArrayList<Usuario> leerUsuarios() throws IOException {
         return this.archivo.leerUsuarios();
     }
-    public Usuario BuscarUsuario(String usuario)throws IOException{
+
+    public Usuario BuscarUsuario(String usuario) throws IOException {
         return this.archivo.BuscarUsuario(usuario);
     }
-    public boolean BuscarAdmin(String tipo) throws IOException{
+
+    public boolean BuscarAdmin(String tipo) throws IOException {
         return this.archivo.BuscarAdmin(tipo);
     }
-    public boolean BuscarTipo()throws IOException{
-       
+
+    public Usuario Buscar(String user) throws IOException {
         ArrayList<Usuario> lista = this.archivo.leerUsuarios();
-        for(Usuario g: lista){
-            System.out.println(g);
+        System.out.println(lista);
+        for (Usuario g: lista) {
+            if (g.getUsuario().equalsIgnoreCase(user)) {
+                return g;
+            }            
         }
-        for(Usuario U: lista ){
-            if (U.getTipo().equalsIgnoreCase("Admin"))
-                return true;
-                
-        }
-        return false;
+        
+        return null;
+        
     }
     
-    public boolean Autentificar (String usuario, String contra)throws IOException{
-        if(obtener(usuario)!=null){
-            Usuario Consulta = BuscarUsuario(usuario);
-            if(Consulta.getUsuario().equals(usuario)&&Consulta.getContra().equals(contra)){
-                return true;
-            }else{
-                return false;
-            }
-        }else{
+    public boolean Autentificar(String usuario, String contra) throws IOException {
+        if (Buscar(usuario) != null) {
+            Usuario Consulta = Buscar(usuario);
+            return Consulta.getUsuario().equalsIgnoreCase(usuario) && Consulta.getContra().equalsIgnoreCase(contra);
+        } else {
+            
             return false;
         }
         
     }
-    public Usuario obtener(String usuario) throws IOException{
+
+    public Usuario obtener(String usuario) throws IOException {
         return archivo.obtener(usuario);
     }
 }
