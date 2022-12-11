@@ -116,7 +116,7 @@ public class ADescuento implements IDescuento {
       int nums = Integer.valueOf(dato[3]);
       String nombre = dato[4];
       ACategoria acategoria = new ACategoria();
-      Categoria categoria = acategoria.BuscarCategoria(nombre);
+      Categoria categoria = acategoria.buscar(nombre);
       Descuento d = new Descuento(particula,servicio,nump,nums,categoria);
       return d;
     }

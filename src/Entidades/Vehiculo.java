@@ -4,98 +4,71 @@
  */
 package Entidades;
 
-import Modelo.*;
-
 /**
  *
  * @author dulfu
  */
 public class Vehiculo {
 
-    private String Placa;
-    private String Marca;
-    private String Propietario;
+    private String placa;
     private String Modelo;
-    private String Cedula;
-    private int Numejes;
-    private int categoria;
-
+    private String color;
+    private String tipo;
+    private String conductor;
     public Vehiculo() {
     }
 
-    public Vehiculo(String Placa, String Marca, String Propietario, String Modelo, String Cedula, int Numejes, int categoria) {
-        this.Placa = Placa;
-        this.Marca = Marca;
-        this.Propietario = Propietario;
+    public Vehiculo(String placa, String Modelo, String color, String tipo, String conductor) {
+        this.placa = placa;
         this.Modelo = Modelo;
-        this.Cedula = Cedula;
-        this.Numejes = Numejes;
-        this.categoria = categoria;
+        this.color = color;
+        this.tipo = tipo;
+        this.conductor = conductor;
     }
 
+    public String getConductor() {
+        return conductor;
+    }
+
+    public void setConductor(String conductor) {
+        this.conductor = conductor;
+    }
+    
     public String getPlaca() {
-        return Placa;
+        return placa;
     }
 
-    public void setPlaca(String Placa) {
-        this.Placa = Placa;
+    public void setPlaca(String placa) {
+        this.placa = placa;
     }
 
-    public String getMarca() {
-        return Marca;
-    }
-
-    public void setMarca(String Marca) {
-        this.Marca = Marca;
-    }
-
-    public String getPropietario() {
-        return Propietario;
-    }
-
-    public void setPropietario(String Propietario) {
-        this.Propietario = Propietario;
-    }
-
-    public String getModelp() {
+    public String getModelo() {
         return Modelo;
     }
 
-    public void setModelp(String Modelp) {
-        this.Modelo= Modelp;
+    public void setModelo(String Modelo) {
+        this.Modelo = Modelo;
     }
 
-    public String getCedula() {
-        return Cedula;
+    public String getColor() {
+        return color;
     }
 
-    public void setCedula(String Cedula) {
-        this.Cedula = Cedula;
+    public void setColor(String color) {
+        this.color = color;
     }
 
-    public int getNumejes() {
-        return Numejes;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setNumejes(int Numejes) {
-        this.Numejes = Numejes;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
-    public int getCategoria() {
-        return categoria;
+    @Override
+    public String toString() {
+        return "Vehiculo{" + "placa=" + placa + ", Modelo=" + Modelo + ", color=" + color + ", tipo=" + tipo + '}';
     }
-
-    public void setCategoria(int categoria) {
-        this.categoria = categoria;
-    }
-    public double calcularImporte(){
-        return 0;           
-    }
-
-    public String INFO() {
-       return String.format("%s\t\t%s\t\t%s\t\t%s\t\t%s\t\t%i\t\t%i\n");
-    }
-    
-    
 
 }

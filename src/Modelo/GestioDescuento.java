@@ -30,5 +30,14 @@ public class GestioDescuento {
     public void ModificarDescuento(Descuento d)throws IOException{
          this.archivo.ModificarDescuento(d);
      }
+    public Descuento BuscaCategoria(String n)throws IOException{
+        ArrayList<Descuento> lista = this.archivo.leerDescuentos();
+        for(Descuento d: lista){
+            if(d.getCategoria().getNombre().equalsIgnoreCase(n)){
+                return d;
+            }
+        }
+        return null;
+    }
     
 }

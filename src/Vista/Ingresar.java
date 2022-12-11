@@ -283,7 +283,9 @@ public class Ingresar extends javax.swing.JFrame {
                     boolean p = this.modeloUsuario.Autentificar(usuari, Con);
                     if (p) {
                         this.modeloUsuario.Buscar(usuari);
-                        JOptionPane.showMessageDialog(this, "Es correcto ", "IMPORTANTE", JOptionPane.NO_OPTION);
+                        JOptionPane.showMessageDialog(this, "Es correcto ", "BIENVENIDO", JOptionPane.NO_OPTION);
+                        GestionVehiculo v = new GestionVehiculo(this,true);
+                        v.setVisible(true);
                     } else {
                         JOptionPane.showMessageDialog(this, "Usuario o contra Incorrecto ", "IMPORTANTE", JOptionPane.NO_OPTION);
                     }

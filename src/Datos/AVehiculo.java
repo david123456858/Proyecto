@@ -4,7 +4,8 @@
  */
 package Datos;
 
-import Entidades.Categoria;
+
+import Entidades.Vehiculo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -18,18 +19,17 @@ import java.util.Scanner;
  *
  * @author dulfu
  */
-public class ACategoria implements ICategorias {
-
-    private File manejadoArchivo;
+public class AVehiculo implements IVehiculo {
+     private File manejadoArchivo;
     private FileWriter modoEscritarua;
     private Scanner modoLectura;
 
-    public ACategoria() {
-        this("Categorias.dat");
+    public AVehiculo() {
+        this("Vehiculos.dat");
     }
 
-    public ACategoria(String name) {
-        this.manejadoArchivo = new File(name);
+    public AVehiculo(String n) {
+        this.manejadoArchivo = new File(n);
     }
 
     public File getManejadoArchivo() {
@@ -57,15 +57,17 @@ public class ACategoria implements ICategorias {
     }
 
     @Override
-    public void registarCategoria(Categoria c) throws IOException {
+    public void registrarVehiculo(Vehiculo v) throws IOException {
         PrintWriter pw = null;
         try {
            this.modoEscritarua = new FileWriter(this.manejadoArchivo, true);
             pw = new PrintWriter(this.modoEscritarua);
-            pw.printf("%s;%s;%.3f;\n",
-                    c.getNum(),
-                    c.getNombre(),
-                    c.getFactura());              
+            pw.printf("%s;%s;%s;%s;%s\n",
+                    v.getPlaca(),
+                    v.getModelo(),
+                    v.getColor(),
+                    v.getTipo(),
+                    v.getConductor());              
         } catch (FileNotFoundException fne) {
             throw new IOException("Error al escribir en el archivo");
         } catch (IOException ioe) {
@@ -78,18 +80,18 @@ public class ACategoria implements ICategorias {
             }
         }
     }
-
-    private Categoria cargarCategoria(String dato[]) {
-        String num = dato[0];
-        String nombre = dato[1];
-        double factura = Double.valueOf(dato[2].replace(",", "."));
-        Categoria categoria = new Categoria(num, nombre, factura);
-        return categoria;
-    }
-
+   private Vehiculo cargarVehiculo(String dato[]){
+       String placa = dato[0];
+       String modelo= dato[1];
+       String color = dato [2];
+       String tipo = dato [3];
+       String nom = dato[4];
+       Vehiculo v = new Vehiculo(placa,modelo,color,tipo,nom);
+       return v;
+   }
     @Override
-    public ArrayList<Categoria> leercategorias() throws IOException {
-        ArrayList<Categoria> lista;
+    public ArrayList<Vehiculo> leetVehiculos() throws IOException {
+     ArrayList<Vehiculo> lista;
         if (!this.manejadoArchivo.exists()) {
             lista = new ArrayList();
             return lista;
@@ -99,8 +101,8 @@ public class ACategoria implements ICategorias {
             lista = new ArrayList();
             while (this.modoLectura.hasNext()) {
                 String dato[] = this.modoLectura.nextLine().split(";");
-                Categoria s = this.cargarCategoria(dato);
-                lista.add(s);
+                Vehiculo v = this.cargarVehiculo(dato);
+                lista.add(v);
             }
             return lista;
         } catch (FileNotFoundException fne) {
@@ -113,25 +115,17 @@ public class ACategoria implements ICategorias {
             }
         }
     }
-     public Categoria buscar(String N)throws IOException{
-        ArrayList<Categoria> lista = leercategorias();
-        for(Categoria c: lista ){
-            if(c.getNombre().equalsIgnoreCase(N)){
-                return c;
-            }
-        }
-        return null;
-    }
+
     @Override
-    public Categoria BuscarCategoria(String n) throws IOException {
-        Categoria buscada = null;
+    public Vehiculo BuscarVehiculo(String v) throws IOException {
+        Vehiculo buscada = null;
         try {
             this.modoLectura = new Scanner(this.manejadoArchivo);
             while (this.modoLectura.hasNext()) {
                 String dato[] = this.modoLectura.nextLine().split(";");
-                Categoria c = this.cargarCategoria(dato);
-                if (c.getNum().equalsIgnoreCase(n)) {
-                    buscada = c;
+                Vehiculo f = this.cargarVehiculo(dato);
+                if (f.getPlaca().equalsIgnoreCase(v)) {
+                    buscada = f;
                     break;
                 }
             }
@@ -151,5 +145,8 @@ public class ACategoria implements ICategorias {
             }
         }
     }
+    }
+    
+    
+    
 
-}

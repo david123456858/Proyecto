@@ -44,14 +44,16 @@ public class GestionDescuento extends javax.swing.JFrame {
     }
 
     public Descuento leerdatos() throws IOException {
-
+        
         double p = Double.valueOf(this.DESCUP.getText());
+        double p1 = (p)/100;
         double s = Double.valueOf(this.DESCUS.getText());
+        double s1 = (s)/100;
         int DP = Integer.valueOf(this.PP.getText());
         int DS = Integer.valueOf(this.PS.getText());
         String cate = this.Categorias.getSelectedItem().toString();
         Categoria cat = this.gestioncate.Buscarpornombre(cate);
-        return new Descuento(p, s, DP, DS, cat);
+        return new Descuento(p1, s1, DP, DS, cat);
     }
 
     public void GuardarDe() throws IOException {
@@ -131,9 +133,9 @@ public class GestionDescuento extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Roboto Medium", 0, 14)); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, -1, -1));
 
-        Categorias.setBackground(new java.awt.Color(153, 153, 153));
+        Categorias.setBackground(new java.awt.Color(255, 255, 255));
         Categorias.setFont(new java.awt.Font("Roboto Black", 0, 12)); // NOI18N
-        Categorias.setForeground(new java.awt.Color(255, 255, 255));
+        Categorias.setForeground(new java.awt.Color(0, 0, 0));
         Categorias.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 CategoriasMousePressed(evt);

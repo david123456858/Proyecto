@@ -40,7 +40,6 @@ public class GestioUsuario {
 
     public Usuario Buscar(String user) throws IOException {
         ArrayList<Usuario> lista = this.archivo.leerUsuarios();
-        System.out.println(lista);
         for (Usuario g: lista) {
             if (g.getUsuario().equalsIgnoreCase(user)) {
                 return g;

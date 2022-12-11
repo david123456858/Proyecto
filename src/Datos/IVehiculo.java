@@ -5,14 +5,15 @@
 package Datos;
 
 import Entidades.Vehiculo;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  *
  * @author dulfu
  */
-public interface ILibroVehiculo {
-    void  gregarVehiculo (Vehiculo V);
-    Vehiculo ConsultarVehiculo(String n);    
-    ArrayList<Vehiculo> InformePeaje();
+public interface IVehiculo {
+    void registrarVehiculo(Vehiculo v)throws IOException;
+    ArrayList<Vehiculo> leetVehiculos() throws IOException;
+    Vehiculo BuscarVehiculo(String v)throws IOException;
 }
