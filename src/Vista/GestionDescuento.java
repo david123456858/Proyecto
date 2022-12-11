@@ -31,7 +31,16 @@ public class GestionDescuento extends javax.swing.JFrame {
         this.gestionde = new GestioDescuento();
         this.cargarCategorias();
     }
-
+    public void limpiarCampos(){
+        this.DESCUP.setText("Ingrese %");
+        this.DESCUS.setText("Ingrese Descuento %");
+        this.PP.setText("Ingrese para particulares");
+        this.PS.setText("Ingrese para servivio publico");
+        PS.setForeground(Color.gray);
+        PP.setForeground(Color.gray);
+        DESCUP.setForeground(Color.gray);
+        DESCUS.setForeground(Color.gray);
+    }
     public void cargarCategorias() {
         try {
             ArrayList<Categoria> lista = this.gestioncate.leercategorias();
@@ -44,11 +53,11 @@ public class GestionDescuento extends javax.swing.JFrame {
     }
 
     public Descuento leerdatos() throws IOException {
-        
+
         double p = Double.valueOf(this.DESCUP.getText());
-        double p1 = (p)/100;
+        double p1 = (p) / 100;
         double s = Double.valueOf(this.DESCUS.getText());
-        double s1 = (s)/100;
+        double s1 = (s) / 100;
         int DP = Integer.valueOf(this.PP.getText());
         int DS = Integer.valueOf(this.PS.getText());
         String cate = this.Categorias.getSelectedItem().toString();
@@ -60,7 +69,7 @@ public class GestionDescuento extends javax.swing.JFrame {
         Descuento d = this.leerdatos();
         this.gestionde.registrarDescuentos(d);
         JOptionPane.showMessageDialog(this, "Datos guardados con exito", "COnfirmacion", JOptionPane.INFORMATION_MESSAGE);
-        
+
     }
 
     /**
@@ -165,6 +174,11 @@ public class GestionDescuento extends javax.swing.JFrame {
                 PPMousePressed(evt);
             }
         });
+        PP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                PPKeyTyped(evt);
+            }
+        });
         jPanel1.add(PP, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 290, 200, -1));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 190, 10));
 
@@ -186,6 +200,11 @@ public class GestionDescuento extends javax.swing.JFrame {
         PS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PSActionPerformed(evt);
+            }
+        });
+        PS.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                PSKeyTyped(evt);
             }
         });
         jPanel1.add(PS, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 350, 190, 20));
@@ -214,6 +233,11 @@ public class GestionDescuento extends javax.swing.JFrame {
                 DESCUPMousePressed(evt);
             }
         });
+        DESCUP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                DESCUPKeyTyped(evt);
+            }
+        });
         jPanel1.add(DESCUP, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 200, -1));
         jPanel1.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, 220, 10));
 
@@ -235,6 +259,11 @@ public class GestionDescuento extends javax.swing.JFrame {
         DESCUS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DESCUSActionPerformed(evt);
+            }
+        });
+        DESCUS.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                DESCUSKeyTyped(evt);
             }
         });
         jPanel1.add(DESCUS, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 190, 20));
@@ -383,12 +412,96 @@ public class GestionDescuento extends javax.swing.JFrame {
     }//GEN-LAST:event_CategoriasMousePressed
 
     private void GuardarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GuardarMousePressed
+
         try {
-            this.GuardarDe();
+            if (DESCUP.getText().isEmpty() || DESCUP.getText().equals("")
+                    || DESCUS.getText().isEmpty()
+                    || DESCUS.getText().equals("")
+                    || PP.getText().isEmpty()
+                    || PP.getText().equals("")
+                    || PS.getText().equals("")
+                    || PS.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Algun campo vacio", "IMPORTANTE", JOptionPane.NO_OPTION);
+            } else {
+                this.GuardarDe();
+                this.limpiarCampos();
+            }
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, ex, "Error de archivo", JOptionPane.ERROR_MESSAGE);;
         }
     }//GEN-LAST:event_GuardarMousePressed
+
+    private void DESCUPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DESCUPKeyTyped
+        char C = evt.getKeyChar();
+        if (Character.isLetter(C)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "No se puede digitar letras", "IMPORTANTE", JOptionPane.NO_OPTION);
+            DESCUP.setCursor(null);
+        } else if ((int) evt.getKeyChar() > 32 && (int) evt.getKeyChar() <= 47
+                || (int) evt.getKeyChar() >= 58 && (int) evt.getKeyChar() <= 64
+                || (int) evt.getKeyChar() >= 91 && (int) evt.getKeyChar() <= 96
+                || (int) evt.getKeyChar() >= 123 && (int) evt.getKeyChar() <= 255) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "No se puede digitar Simbolos", "IMPORTANTE", JOptionPane.NO_OPTION);
+            DESCUP.setCursor(null);
+        }
+    }//GEN-LAST:event_DESCUPKeyTyped
+
+    private void PPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PPKeyTyped
+        char C = evt.getKeyChar();
+        if (Character.isLetter(C)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "No se puede digitar letras", "IMPORTANTE", JOptionPane.NO_OPTION);
+            PP.setCursor(null);
+        } else if ((int) evt.getKeyChar() > 32 && (int) evt.getKeyChar() <= 47
+                || (int) evt.getKeyChar() >= 58 && (int) evt.getKeyChar() <= 64
+                || (int) evt.getKeyChar() >= 91 && (int) evt.getKeyChar() <= 96
+                || (int) evt.getKeyChar() >= 123 && (int) evt.getKeyChar() <= 255) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "No se puede digitar Simbolos", "IMPORTANTE", JOptionPane.NO_OPTION);
+            PP.setCursor(null);
+        }
+    }//GEN-LAST:event_PPKeyTyped
+
+    private void DESCUSKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DESCUSKeyTyped
+        char C = evt.getKeyChar();
+        if (Character.isLetter(C)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "No se puede digitar letras", "IMPORTANTE", JOptionPane.NO_OPTION);
+            DESCUS.setCursor(null);
+        } else if ((int) evt.getKeyChar() > 32 && (int) evt.getKeyChar() <= 47
+                || (int) evt.getKeyChar() >= 58 && (int) evt.getKeyChar() <= 64
+                || (int) evt.getKeyChar() >= 91 && (int) evt.getKeyChar() <= 96
+                || (int) evt.getKeyChar() >= 123 && (int) evt.getKeyChar() <= 255) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "No se puede digitar Simbolos", "IMPORTANTE", JOptionPane.NO_OPTION);
+            DESCUS.setCursor(null);
+        }
+    }//GEN-LAST:event_DESCUSKeyTyped
+
+    private void PSKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PSKeyTyped
+        char C = evt.getKeyChar();
+        if (Character.isLetter(C)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "No se puede digitar letras", "IMPORTANTE", JOptionPane.NO_OPTION);
+            PS.setCursor(null);
+        } else if ((int) evt.getKeyChar() > 32 && (int) evt.getKeyChar() <= 47
+                || (int) evt.getKeyChar() >= 58 && (int) evt.getKeyChar() <= 64
+                || (int) evt.getKeyChar() >= 91 && (int) evt.getKeyChar() <= 96
+                || (int) evt.getKeyChar() >= 123 && (int) evt.getKeyChar() <= 255) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "No se puede digitar Simbolos", "IMPORTANTE", JOptionPane.NO_OPTION);
+            PS.setCursor(null);
+        }
+    }//GEN-LAST:event_PSKeyTyped
 
     /**
      * @param args the command line arguments

@@ -28,7 +28,14 @@ public class GestionCategorias extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.modeloCategoria = new GestioCategorias();
     }
-
+    public void limpiarCampos(){
+        this.Nom.setText("Ingrese Categoria");
+        this.Num.setText("Ingrese Numero");
+        this.Tarifa.setText("Ingrese Tarifa");
+        Num.setForeground(Color.gray);
+        Tarifa.setForeground(Color.gray);
+        Nom.setForeground(Color.gray);
+    }
     public void guardar() throws IOException {
         try {
             String numero = this.Num.getText();
@@ -324,6 +331,7 @@ public class GestionCategorias extends javax.swing.JFrame {
             try {
                 this.guardar();
                 JOptionPane.showMessageDialog(this, "Datos guardados con exito", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+                this.limpiarCampos();
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(this, ex, "Error de archivo", JOptionPane.ERROR_MESSAGE);
             }

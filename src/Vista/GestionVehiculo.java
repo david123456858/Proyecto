@@ -40,14 +40,25 @@ public class GestionVehiculo extends javax.swing.JDialog {
         this.modeloVehiculo = new GestioVehiculo();
         this.cargarDescuentos();
     }
-
+    public void LimpiarCampos(){
+        this.PC.setText("Ingrese Placa");
+        this.Modelo.setText("Ingrese Modelo");
+        this.Colo.setText("Ingrese Color");
+        this.PAR.setText("");
+        this.SER.setText("");
+        this.NOM.setText("Ingrese Nombre");
+        Modelo.setForeground(Color.gray);
+        PC.setForeground(Color.gray);
+        Colo.setForeground(Color.gray);
+        PAR.setForeground(Color.gray);
+        NOM.setForeground(Color.gray);
+    }
     public void Generar() throws IOException {
-        DateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, yyyy '@' HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, yyyy '-' HH:mm:ss");
         String date = dateFormat.format(Calendar.getInstance().getTime());
         String tipo = "";
         String placa = this.PC.getText();
         String modelo = this.Modelo.getText();
-        String color = this.Colo.getText();
         if (PAR.isSelected()) {
             tipo = "Particular";
         } else {
@@ -56,7 +67,7 @@ public class GestionVehiculo extends javax.swing.JDialog {
             }
         }
         String Nombre = this.NOM.getText();
-        double Descuento;
+        
         int c = this.modeloVehiculo.buscar(placa);
         String d = this.Descuentos.getSelectedItem().toString();
         Descuento descuento = this.modeloDescuento.BuscaCategoria(d);
@@ -168,8 +179,6 @@ public class GestionVehiculo extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         GE = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        CO = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         NOM = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JSeparator();
@@ -218,6 +227,11 @@ public class GestionVehiculo extends javax.swing.JDialog {
                 PCMousePressed(evt);
             }
         });
+        PC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                PCKeyTyped(evt);
+            }
+        });
         jPanel1.add(PC, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 200, 20));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 210, 10));
 
@@ -234,6 +248,11 @@ public class GestionVehiculo extends javax.swing.JDialog {
         Modelo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 ModeloMousePressed(evt);
+            }
+        });
+        Modelo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                ModeloKeyTyped(evt);
             }
         });
         jPanel1.add(Modelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 180, 20));
@@ -253,6 +272,11 @@ public class GestionVehiculo extends javax.swing.JDialog {
         Colo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 ColoMousePressed(evt);
+            }
+        });
+        Colo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                ColoKeyTyped(evt);
             }
         });
         jPanel1.add(Colo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, 140, 20));
@@ -307,35 +331,7 @@ public class GestionVehiculo extends javax.swing.JDialog {
         });
         GE.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 40));
 
-        jPanel1.add(GE, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 170, 40));
-
-        CO.setBackground(new java.awt.Color(193, 211, 1));
-
-        jLabel7.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("CONSULTAR");
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabel7MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jLabel7MouseExited(evt);
-            }
-        });
-
-        javax.swing.GroupLayout COLayout = new javax.swing.GroupLayout(CO);
-        CO.setLayout(COLayout);
-        COLayout.setHorizontalGroup(
-            COLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-        );
-        COLayout.setVerticalGroup(
-            COLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(CO, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 410, -1, -1));
+        jPanel1.add(GE, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, 170, 40));
 
         jLabel8.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
@@ -349,6 +345,11 @@ public class GestionVehiculo extends javax.swing.JDialog {
         NOM.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 NOMMousePressed(evt);
+            }
+        });
+        NOM.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                NOMKeyTyped(evt);
             }
         });
         jPanel1.add(NOM, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 140, -1));
@@ -434,19 +435,12 @@ public class GestionVehiculo extends javax.swing.JDialog {
         GE.setBackground(new Color(198, 225, 0));
     }//GEN-LAST:event_jLabel6MouseExited
 
-    private void jLabel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseEntered
-        CO.setBackground(new Color(232, 255, 1));
-    }//GEN-LAST:event_jLabel7MouseEntered
-
-    private void jLabel7MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseExited
-        CO.setBackground(new Color(198, 225, 0));
-    }//GEN-LAST:event_jLabel7MouseExited
-
     private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
 
         try {
             this.Guardar();
             this.Generar();
+            this.LimpiarCampos();
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, ex, "Error de archivo", JOptionPane.ERROR_MESSAGE);
         }
@@ -473,13 +467,78 @@ public class GestionVehiculo extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_NOMMousePressed
 
+    private void NOMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NOMKeyTyped
+        char C = evt.getKeyChar();
+        if (Character.isDigit(C)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "No se puede digitar numeros", "IMPORTANTE", JOptionPane.NO_OPTION);
+            NOM.setCursor(null);
+        } else if ((int) evt.getKeyChar() > 32 && (int) evt.getKeyChar() <= 47
+                || (int) evt.getKeyChar() >= 58 && (int) evt.getKeyChar() <= 64
+                || (int) evt.getKeyChar() >= 91 && (int) evt.getKeyChar() <= 96
+                || (int) evt.getKeyChar() >= 123 && (int) evt.getKeyChar() <= 255) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "No se puede digitar Simbolos", "IMPORTANTE", JOptionPane.NO_OPTION);
+            NOM.setCursor(null);
+        }
+    }//GEN-LAST:event_NOMKeyTyped
+
+    private void ModeloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ModeloKeyTyped
+       char C = evt.getKeyChar();
+        if (Character.isLetter(C)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "No se puede digitar letras", "IMPORTANTE", JOptionPane.NO_OPTION);
+            Modelo.setCursor(null);
+        } else if ((int) evt.getKeyChar() > 32 && (int) evt.getKeyChar() <= 47
+                || (int) evt.getKeyChar() >= 58 && (int) evt.getKeyChar() <= 64
+                || (int) evt.getKeyChar() >= 91 && (int) evt.getKeyChar() <= 96
+                || (int) evt.getKeyChar() >= 123 && (int) evt.getKeyChar() <= 255) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "No se puede digitar Simbolos", "IMPORTANTE", JOptionPane.NO_OPTION);
+            Modelo.setCursor(null);
+        }
+    }//GEN-LAST:event_ModeloKeyTyped
+
+    private void PCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PCKeyTyped
+         if ((int) evt.getKeyChar() > 32 && (int) evt.getKeyChar() <= 47
+                || (int) evt.getKeyChar() >= 58 && (int) evt.getKeyChar() <= 64
+                || (int) evt.getKeyChar() >= 91 && (int) evt.getKeyChar() <= 96
+                || (int) evt.getKeyChar() >= 123 && (int) evt.getKeyChar() <= 255) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "No se puede digitar Simbolos", "IMPORTANTE", JOptionPane.NO_OPTION);
+            PC.setCursor(null);
+        }
+    }//GEN-LAST:event_PCKeyTyped
+
+    private void ColoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ColoKeyTyped
+               char C = evt.getKeyChar();
+        if (Character.isDigit(C)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "No se puede digitar numeros", "IMPORTANTE", JOptionPane.NO_OPTION);
+            Colo.setCursor(null);
+        } else if ((int) evt.getKeyChar() > 32 && (int) evt.getKeyChar() <= 47
+                || (int) evt.getKeyChar() >= 58 && (int) evt.getKeyChar() <= 64
+                || (int) evt.getKeyChar() >= 91 && (int) evt.getKeyChar() <= 96
+                || (int) evt.getKeyChar() >= 123 && (int) evt.getKeyChar() <= 255) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "No se puede digitar Simbolos", "IMPORTANTE", JOptionPane.NO_OPTION);
+            Colo.setCursor(null);
+        }
+    }//GEN-LAST:event_ColoKeyTyped
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup Botones;
-    private javax.swing.JPanel CO;
     private javax.swing.JTextField Colo;
     private javax.swing.JComboBox<String> Descuentos;
     private javax.swing.JPanel GE;
@@ -495,7 +554,6 @@ public class GestionVehiculo extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

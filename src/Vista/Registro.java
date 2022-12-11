@@ -30,6 +30,20 @@ public class Registro extends javax.swing.JDialog {
         this.modeloUsuario = new GestioUsuario();
     }
 
+    public void limpiarCampos() {
+        this.txtnombre.setText("Ingrese Nombre");
+        this.Correo.setText("Ingrese Correo");
+        this.CC.setText("Ingrese Cedula");
+        this.Usuario.setText("Ingrese Usuario");
+        this.Contra.setText("**********");
+        Contra.setForeground(Color.gray);
+        Correo.setForeground(Color.gray);
+        txtnombre.setForeground(Color.gray);
+        Contra.setForeground(Color.gray);
+        Usuario.setForeground(Color.gray);
+        CC.setForeground(Color.gray);
+    }
+
     private Usuario leerDatos() throws IOException {
         String tipo = "";
         String nombre = this.txtnombre.getText();
@@ -308,10 +322,10 @@ public class Registro extends javax.swing.JDialog {
                 || CC.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Algun campo vacio", "IMPORTANTE", JOptionPane.NO_OPTION);
         } else {
-
             this.GuardarDatos();
-
+            this.limpiarCampos();
         }
+        
 
     }//GEN-LAST:event_RegsitrarMousePressed
 
